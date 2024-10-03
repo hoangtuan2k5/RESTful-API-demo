@@ -12,9 +12,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     @Query("SELECT e FROM Employee e WHERE " +
             "(:id IS NULL OR e.id = :id) AND " +
-            "(:firstName IS NULL OR e.firstName = :firstName) AND " +
-            "(:lastName IS NULL OR e.lastName = :lastName) AND " +
-            "(:email IS NULL OR e.email = :email)")
+            "(:firstName IS NULL OR e.firstName LIKE CONCAT('%', :firstName, '%')) AND " +
+            "(:lastName IS NULL OR e.lastName LIKE CONCAT('%', :lastName, '%')) AND " +
+            "(:email IS NULL OR e.email LIKE CONCAT('%', :email, '%'))")
     List<Employee> find(@Param("id") Integer id,
                         @Param("firstName") String firstName,
                         @Param("lastName") String lastName,
